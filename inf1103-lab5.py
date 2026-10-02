@@ -37,14 +37,14 @@ def display_all():
                 f"Price: ${item['price']:.2f} | Stock: {item['stock']}"
             )
     print("-" * 45 + "\n")
-    print("\nDisplay all")
 
+# Add new item
 def add_product():
     """Appends a new product dictionary to the inventory structure."""
     print("\nAdd New Product")
     prod_id = input("Product ID: ").strip()
 
-    # Check for duplicate ID
+    # check for dupe IDs
     for item in inventory:
         if item["id"].upper() == prod_id.upper():
             print("Error: Product ID already exists in data-stack.\n")
@@ -67,8 +67,23 @@ def add_product():
     inventory.append(new_item)
     print("\nProduct added successfully!\n")
 
+# Update exisiting item amount 
 def update_stock():
-    print("\nUpdate stock")
+    print("\nUpdate Stock")
+    prod_id = input("Enter Product ID to update: ").strip()
+
+    for item in inventory:
+        if item["id"].upper() == prod_id.upper():
+            try:
+                new_stock = int(input(f"Enter new stock for {item['name']}: "))
+                item["stock"] = new_stock
+                print("Stock updated successfully!\n")
+                return
+            except ValueError:
+                print("Invalid stock entry. Operation aborted.\n")
+                return
+
+    print("Product not found.\n")
 
 def search_product():
     print("\nSearchi product")
