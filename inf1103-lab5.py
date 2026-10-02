@@ -85,8 +85,23 @@ def update_stock():
 
     print("Product not found.\n")
 
+# search based on specific ID in inventory
 def search_product():
-    print("\nSearchi product")
+    print("\nSearch Product")
+    prod_id = input("Enter Product ID: ").strip()
+
+    for item in inventory:
+        if item["id"].upper() == prod_id.upper():
+            print("\nProduct Found")
+            print("-" * 45)
+            print(f"ID: {item['id']}")
+            print(f"Name: {item['name']}")
+            print(f"Price: ${item['price']:.2f}")
+            print(f"Stock: {item['stock']}")
+            print("-" * 45 + "\n")
+            return
+
+    print("\nProduct not found.\n")
 
 def save_inventory():
     print("\nSaved")
