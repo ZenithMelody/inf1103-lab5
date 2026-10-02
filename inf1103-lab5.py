@@ -24,7 +24,19 @@ def load_inventory():
             {"id": "P003", "name": "Keyboard", "price": 45.00, "stock": 25},
         ]
 
+# Shows current inventory 
 def display_all():
+    print("\nCurrent Inventory")
+    print("-" * 45)
+    if not inventory:
+        print("Inventory stack is currently empty.")
+    else:
+        for item in inventory:
+            print(
+                f"ID: {item['id']} | Name: {item['name']} | "
+                f"Price: ${item['price']:.2f} | Stock: {item['stock']}"
+            )
+    print("-" * 45 + "\n")
     print("\nDisplay all")
 
 def add_product():
