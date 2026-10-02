@@ -5,7 +5,6 @@ inventory = []
 FILENAME = "inventory.json"
 
 def load_inventory():
-    """Subroutine to load persistence data from inventory.json or initialize defaults."""
     global inventory
     if os.path.exists(FILENAME):
         try:
@@ -14,10 +13,13 @@ def load_inventory():
             print("inventory.json found.")
             print("Inventory loaded successfully.\n")
         except Exception:
-            print("Corrupted data-stack detected. Starting with empty inventory.\n")
             inventory = []
     else:
-        # default products so inventory not empty
+        print("inventory.json not found. Initializing default inventory.\n")
+        inventory = []
+
+    # If the file loaded as empty, populate it with the required 3 initial products
+    if not inventory:
         inventory = [
             {"id": "P001", "name": "Laptop", "price": 1200.00, "stock": 15},
             {"id": "P002", "name": "Mouse", "price": 25.50, "stock": 40},
@@ -103,8 +105,15 @@ def search_product():
 
     print("\nProduct not found.\n")
 
+# adds inventory into the .json file
 def save_inventory():
-    print("\nSaved")
+    print("Saving inventory...")
+    try:
+        with open(FILENAME, "w") as f:
+            json.dump(inventory, f, indent=4)
+        print("Inventory saved successfully to inventory.json.\n")
+    except Exception as e:
+        print(f"Unappeased friction during save operation: {e}\n")
 
 def main():
     print("=" * 45)
