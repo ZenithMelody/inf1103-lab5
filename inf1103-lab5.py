@@ -40,7 +40,32 @@ def display_all():
     print("\nDisplay all")
 
 def add_product():
-    print("\nAdd product")
+    """Appends a new product dictionary to the inventory structure."""
+    print("\nAdd New Product")
+    prod_id = input("Product ID: ").strip()
+
+    # Check for duplicate ID
+    for item in inventory:
+        if item["id"].upper() == prod_id.upper():
+            print("Error: Product ID already exists in data-stack.\n")
+            return
+
+    name = input("Product Name: ").strip()
+    try:
+        price = float(input("Price: "))
+        stock = int(input("Stock Quantity: "))
+    except ValueError:
+        print("Data type mismatch. Price must be numeric and Stock must be an integer.\n")
+        return
+
+    new_item = {
+        "id": prod_id,
+        "name": name,
+        "price": price,
+        "stock": stock,
+    }
+    inventory.append(new_item)
+    print("\nProduct added successfully!\n")
 
 def update_stock():
     print("\nUpdate stock")
